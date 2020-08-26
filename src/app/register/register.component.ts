@@ -147,6 +147,9 @@ initForm(){
        this.emp.Designation = this.empForm.value['desg'];
         this.emp.StationCode = this.empForm.value['station'];
          this.emp.LocationName = this.empForm.value['location'];
+
+         console.log('on submit.....');
+         console.log(this.emp)
     // this.emp={
     //   "FirstName" : this.empForm.value['firstName'],
 
