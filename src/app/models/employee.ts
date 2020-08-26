@@ -13,6 +13,7 @@ Age : number;
 BloodGroup:string;
 Gender : string;
 MaritalStatus : boolean;
+Marital : string;
 Address1 : string;
 Adress2 : string;
 Place : string;
