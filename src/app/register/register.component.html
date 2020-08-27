@@ -10,7 +10,7 @@
 
           <div class="form-group">
             <div class="col-sm-6">
-              <input type="text" name="fistName"  formControlName="firstName" placeholder="First Name" class="form-control">
+              <input type="text" name="fistName" (focusout)="focusOutFunction('fname',$event)" formControlName="firstName" placeholder="First Name*" class="form-control">
             </div>
             <div class="col-sm-6">
               <input type="text" name="middleName" formControlName="middleName" placeholder="Middle Name" class="form-control">
@@ -146,7 +146,7 @@
              <div class="form-group">
             <legend>Contact No:</legend>
                 <div class="col-sm-6">
-              <input type="text" name="phone" formControlName="phone" placeholder="Phone" class="form-control">
+              <input type="text" name="phone" (focusout)="focusOutFunction('phone',$event) formControlName="phone" placeholder="Phone" class="form-control">
             </div>
           </div>
     </div>

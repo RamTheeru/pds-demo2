@@ -5,6 +5,8 @@ import {PdsApiService} from '../pds-api.service';
 import {SweetService} from '../sweet.service';
 import {UserType} from '../models/usertype';
 import {Employee} from '../models/employee';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,6 +14,7 @@ import {Employee} from '../models/employee';
   providers:[SweetService]
 })
 export class RegisterComponent implements OnInit {
+
  emp : Employee = new Employee();
 dates =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 userTypes : UserType[];
@@ -154,9 +157,31 @@ initForm(){
          console.log('on submit.....');
          
          console.log(this.emp);
+         
 
 
 
+  }
+  focusOutFunction(field,event:any):void{
+
+      const errorTitle : string = 'INVALID INPUT!!!';
+    if(field=='fname'){
+      var f = 'First Name';
+      this.showrequiredMessage(f,event,errorTitle);
+         
+    }
+    if(field == 'phone'){
+        var f = 'Employee Contact Number';
+        this.showrequiredMessage(field,event,errorTitle);
+    }
+
+  }
+  showrequiredMessage(field,event:any,title){
+         var txt = event.target.value;
+         var msg = field+ ' field required!!';
+          if(txt == '' || txt==null){
+            this._swServ.showMessage(title,msg);
+          }
   }
 
   
