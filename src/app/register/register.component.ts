@@ -172,13 +172,13 @@ initForm(){
     }
     if(field == 'phone'){
         var f = 'Employee Contact Number';
-        this.showrequiredMessage(field,event,errorTitle);
+        this.showrequiredMessage(f,event,errorTitle);
     }
 
   }
   showrequiredMessage(field,event:any,title){
          var txt = event.target.value;
-         var msg = field+ ' field required!!';
+         var msg = field+' '+' field required!!';
           if(txt == '' || txt==null){
             this._swServ.showMessage(title,msg);
           }

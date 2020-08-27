@@ -145,9 +145,16 @@
           </div>
              <div class="form-group">
             <legend>Contact No:</legend>
+    
                 <div class="col-sm-6">
-              <input type="text" name="phone" (focusout)="focusOutFunction('phone',$event) formControlName="phone" placeholder="Phone" class="form-control">
-            </div>
+                   <div class="input-group mb-3 input-group-sm">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">+91</span>
+                        </div>
+                      <input type="text" name="phone" (focusout)="focusOutFunction('phone',$event)" formControlName="phone" placeholder="Phone*" class="form-control">
+                   </div>
+                            
+                </div>
           </div>
     </div>
   </div>  <!-- My row 1 -->
@@ -170,15 +177,23 @@
           </div>
           <div class="form-group">
             <div class="col-sm-6">
-              <input type="pPhoneNbr" formControlName="gphone" placeholder="Phone Number" class="form-control">
+                   <div class="input-group mb-3 input-group-sm">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">+91</span>
+                        </div>
+                      <input type="text" name="gphone"  formControlName="gphone" placeholder="Phone" class="form-control">
+                   </div>
+            
             </div>
            </div>
       </div>
 
       <div class="col">
-          <legend>Date of Join</legend>
+              <legend>Date of Join</legend>
                           <div class="form-group">
+                      
                        <div class="row">
+                           
                             <div class="col">
                               
                                     <select type="gender" formControlName="day2" placeholder="Date" class="form-control">
