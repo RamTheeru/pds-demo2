@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/forms';
 
 import {PdsApiService} from '../pds-api.service';
+import {SweetService} from '../sweet.service';
 import {UserType} from '../models/usertype';
 import {Employee} from '../models/employee';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers:[SweetService]
 })
 export class RegisterComponent implements OnInit {
  emp : Employee = new Employee();
@@ -24,7 +26,7 @@ empForm : FormGroup;
     { id: 1, name: 'Contract' }
 
   ];
-  constructor(private _fb:FormBuilder,private api:PdsApiService) {
+  constructor(private _fb:FormBuilder,private api:PdsApiService,private _swServ:SweetService) {
      this.initForm();
     this.addCheckboxes();
     this.addCheckboxes_t();
@@ -102,6 +104,7 @@ initForm(){
      this.emp.FirstName = this.empForm.value['firstName'];
      this.emp.LastName = this.empForm.value['lastName'];
      this.emp.MiddleName = this.empForm.value['middleName'];
+     this.emp.Phone = this.empForm.value['phone'];
      this.emp.Day = this.empForm.value['day'];
      this.emp.Month = this.empForm.value['month'];
      this.emp.Year = this.empForm.value['year'];
@@ -139,7 +142,7 @@ initForm(){
              this.emp.Guard_FirstName = this.empForm.value['gfirstName'];
      this.emp.Guard_LastName = this.empForm.value['glastName'];
      this.emp.Guard_MiddleName = this.empForm.value['gmiddleName'];
-      this.emp.Guard_LastName = this.empForm.value['glastName'];
+      this.emp.Guard_Phone = this.empForm.value['gphone'];
            this.emp.Day2 = this.empForm.value['day2'];
      this.emp.Month2 = this.empForm.value['month2'];
      this.emp.Year2 = this.empForm.value['year2'];
@@ -149,12 +152,9 @@ initForm(){
          this.emp.LocationName = this.empForm.value['location'];
 
          console.log('on submit.....');
-         console.log(this.emp)
-    // this.emp={
-    //   "FirstName" : this.empForm.value['firstName'],
+         
+         console.log(this.emp);
 
-
-    // };
 
 
   }
