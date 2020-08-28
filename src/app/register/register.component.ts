@@ -97,13 +97,13 @@ initForm(){
       .map((checked, i) => checked ? this.maritals[i].name : null)
       .filter(v => v !== null);
       console.log('checkboxes')
-    console.log(selectedmaritals);
+      console.log(selectedmaritals);
 
       const selectempTypes = this.empForm.value.typs
       .map((checked, i) => checked ? this.empTypes[i].name : null)
       .filter(v => v !== null);
       console.log('checkboxes')
-    console.log(selectempTypes);
+      console.log(selectempTypes);
      this.emp.FirstName = this.empForm.value['firstName'];
      this.emp.LastName = this.empForm.value['lastName'];
      this.emp.MiddleName = this.empForm.value['middleName'];
@@ -136,25 +136,25 @@ initForm(){
      {this.emp.MaritalStatus= false;}
 
       this.emp.Address1 = this.empForm.value['ad1'];
-       this.emp.Adress2 = this.empForm.value['ad2'];
-        this.emp.Place = this.empForm.value['place'];
-         this.emp.State = this.empForm.value['state'];
-          this.emp.PostalCode = this.empForm.value['postal'];
-           this.emp.AAdharNumber = this.empForm.value['aad'];
-            this.emp.PAN = this.empForm.value['pan'];
-             this.emp.Guard_FirstName = this.empForm.value['gfirstName'];
-     this.emp.Guard_LastName = this.empForm.value['glastName'];
-     this.emp.Guard_MiddleName = this.empForm.value['gmiddleName'];
+      this.emp.Adress2 = this.empForm.value['ad2'];
+      this.emp.Place = this.empForm.value['place'];
+      this.emp.State = this.empForm.value['state'];
+      this.emp.PostalCode = this.empForm.value['postal'];
+      this.emp.AAdharNumber = this.empForm.value['aad'];
+      this.emp.PAN = this.empForm.value['pan'];
+      this.emp.Guard_FirstName = this.empForm.value['gfirstName'];
+      this.emp.Guard_LastName = this.empForm.value['glastName'];
+      this.emp.Guard_MiddleName = this.empForm.value['gmiddleName'];
       this.emp.Guard_Phone = this.empForm.value['gphone'];
-           this.emp.Day2 = this.empForm.value['day2'];
-     this.emp.Month2 = this.empForm.value['month2'];
-     this.emp.Year2 = this.empForm.value['year2'];
+      this.emp.Day2 = this.empForm.value['day2'];
+      this.emp.Month2 = this.empForm.value['month2'];
+      this.emp.Year2 = this.empForm.value['year2'];
       this.emp.LoginType = this.empForm.value['ut'];
-       this.emp.Designation = this.empForm.value['desg'];
-        this.emp.StationCode = this.empForm.value['station'];
-         this.emp.LocationName = this.empForm.value['location'];
+      this.emp.Designation = this.empForm.value['desg'];
+      this.emp.StationCode = this.empForm.value['station'];
+      this.emp.LocationName = this.empForm.value['location'];
 
-         console.log('on submit.....');
+      console.log('on submit.....');
          
          console.log(this.emp);
          
@@ -178,10 +178,31 @@ initForm(){
   }
   showrequiredMessage(field,event:any,title){
          var txt = event.target.value;
-         var msg = field+' '+' field required!!';
+          var test = false;
           if(txt == '' || txt==null){
+          var msg = field+' '+' field required!!';
             this._swServ.showMessage(title,msg);
           }
+          else if(field == 'Employee Contact Number')
+          {
+            var msg = field+' '+' contains Only Numbers!!';
+             test = this.ValidateNumbers(txt);
+             if(!test){
+               this._swServ.showMessage(title,msg);
+               
+             }
+
+
+              
+          }
+  }
+
+  ValidateNumbers(txt:string) : boolean{
+      var val  = false;
+       var regexp = new RegExp('^[0-9]+$');
+       val = regexp.test(txt);
+      return val;
+
   }
 
   
