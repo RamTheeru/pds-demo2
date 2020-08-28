@@ -82,7 +82,7 @@
             <div class="form-group">
                   <div class="col-sm-6"  formArrayName="mars" *ngFor="let c of maritalsFormArray.controls; let i = index;">
                    
-                    <input type="checkbox"  name="m" id="i" [formControlName]="i">{{maritals[i].name}}
+                    <input type="checkbox" (change)="checkValue($event,'m')" name="m" id="i" [formControlName]="i">{{maritals[i].name}}
                      </div>
                
                   
@@ -136,7 +136,7 @@
             <div class="form-group">
                  <div class="col-sm-6"  formArrayName="typs" *ngFor="let c of typsFormArray.controls; let i = index;">
                    
-                    <input type="checkbox" name="i"  [formControlName]="i">{{empTypes[i].name}}
+                    <input type="checkbox" name="i" (change)="checkValue($event,'typs')"  [formControlName]="i">{{empTypes[i].name}}
                      </div>
                 <!-- <div class="col-sm-6">
                   <input type="checkbox" ngModel name="Math">Contract

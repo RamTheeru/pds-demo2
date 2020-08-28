@@ -165,19 +165,20 @@ initForm(){
   focusOutFunction(field,event:any):void{
 
       const errorTitle : string = 'INVALID INPUT!!!';
+       var txt = event.target.value;
     if(field=='fname'){
       var f = 'First Name';
-      this.showrequiredMessage(f,event,errorTitle);
+      this.showrequiredMessage(f,txt,errorTitle);
          
     }
     if(field == 'phone'){
         var f = 'Employee Contact Number';
-        this.showrequiredMessage(f,event,errorTitle);
+        this.showrequiredMessage(f,txt,errorTitle);
     }
 
   }
-  showrequiredMessage(field,event:any,title){
-         var txt = event.target.value;
+  showrequiredMessage(field,txt,title){
+        
           var test = false;
           if(txt == '' || txt==null){
           var msg = field+' '+' field required!!';
@@ -202,6 +203,64 @@ initForm(){
        var regexp = new RegExp('^[0-9]+$');
        val = regexp.test(txt);
       return val;
+
+  }
+  checkValue(event:any,field){
+        const errorTitle : string = 'INVALID INPUT!!!';
+        if(field=='mars'){
+              const selectedmaritals = this.empForm.value.mars
+                  .map((checked, i) => checked ? this.maritals[i].name : null)
+                  .filter(v => v !== null);
+
+          
+
+                if(selectedmaritals.length>0)
+                {
+                  this.emp.Marital = selectedmaritals[0];
+                  if(this.emp.Marital == "Married"){
+                    this.emp.MaritalStatus = true;
+                  }
+                  else{
+                    this.emp.MaritalStatus= false;
+
+                    }
+                }
+                else
+                {
+                  this.emp.MaritalStatus= false;
+                    var txt = '';
+                    var f = 'Employee Marital Status';
+                    this.showrequiredMessage(f,'',errorTitle);
+                    
+
+                }
+        }
+        else{
+                    const selectempTypes = this.empForm.value.typs
+                .map((checked, i) => checked ? this.empTypes[i].name : null)
+                .filter(v => v !== null);
+
+                if(selectempTypes.length>0)
+                {
+                  this.emp.Employeetype = selectempTypes[0];
+                    if(this.emp.Employeetype == "Permanent"){
+                    this.emp.IsPermanent = true;
+                  }
+                  else{this.emp.IsPermanent= false;}
+                }
+                else
+                {
+                  this.emp.IsPermanent= false;
+                    var txt = '';
+                    var f = 'Employee Type ';
+                    this.showrequiredMessage(f,'',errorTitle);
+
+                }
+
+
+        }
+          
+ 
 
   }
 
