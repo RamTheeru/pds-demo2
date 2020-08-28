@@ -10,8 +10,8 @@ export class SweetService {
   showSuccessMessage(title,text=''){
     swal(title,text,'success');
   }
-    showMessage(title,text=''){
-    swal(title,text);
+    showErrorMessage(title,text=''){
+    swal(title,text,'error');
 
   }
 
