@@ -14,8 +14,9 @@ import {Employee} from '../models/employee';
   providers:[SweetService]
 })
 export class RegisterComponent implements OnInit {
-
- emp : Employee = new Employee();
+  employee
+loaded : boolean = false;
+ 
 dates =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 userTypes : UserType[];
 empForm : FormGroup;
@@ -47,6 +48,7 @@ empForm : FormGroup;
   }
 
 initForm(){
+
   this.empForm = this._fb.group({
     firstName: new FormControl(),
     lastName: new FormControl(),
@@ -57,7 +59,7 @@ initForm(){
         age: new FormControl(),
         bg: new FormControl(),
          gender: new FormControl(''),
-      mars:new FormArray([]),
+      /mars:new FormArray([]),
        ad1: new FormControl(),
         ad2: new FormControl(),
          place: new FormControl(),
@@ -93,6 +95,9 @@ initForm(){
     return this.empForm.controls.typs as FormArray;
   }
   onSubmit(){
+   const emp : Employee = new Employee();
+    const errorTitle : string = 'INVALID INPUT!!!';
+    //this.loaded = true;
     const selectedmaritals = this.empForm.value.mars
       .map((checked, i) => checked ? this.maritals[i].name : null)
       .filter(v => v !== null);
@@ -104,59 +109,75 @@ initForm(){
       .filter(v => v !== null);
       console.log('checkboxes')
       console.log(selectempTypes);
-     this.emp.FirstName = this.empForm.value['firstName'];
-     this.emp.LastName = this.empForm.value['lastName'];
-     this.emp.MiddleName = this.empForm.value['middleName'];
-     this.emp.Phone = this.empForm.value['phone'];
-     this.emp.Day = this.empForm.value['day'];
-     this.emp.Month = this.empForm.value['month'];
-     this.emp.Year = this.empForm.value['year'];
-     this.emp.Age = this.empForm.value['age'];
-     this.emp.BloodGroup = this.empForm.value['bg'];
-     this.emp.Gender = this.empForm.value['gender'];
+     emp.FirstName = this.empForm.value['firstName'];
+     emp.LastName = this.empForm.value['lastName'];
+     emp.MiddleName = this.empForm.value['middleName'];
+     emp.Phone = this.empForm.value['phone'];
+     emp.Day = this.empForm.value['day'];
+     emp.Month = this.empForm.value['month'];
+     emp.Year = this.empForm.value['year'];
+     emp.Age = this.empForm.value['age'];
+     emp.BloodGroup = this.empForm.value['bg'];
+     emp.Gender = this.empForm.value['gender'];
      if(selectedmaritals.length>0)
      {
-      this.emp.Marital = selectedmaritals[0];
-      if(this.emp.Marital == "Married"){
-        this.emp.MaritalStatus = true;
+      emp.Marital = selectedmaritals[0];
+      if(emp.Marital == "Married"){
+        emp.MaritalStatus = true;
       }
-      else{this.emp.MaritalStatus= false;}
+      else{emp.MaritalStatus= false;}
      }
-     else{this.emp.MaritalStatus= false;}
+     else{
+       emp.MaritalStatus= false;
+         var txt = '';
+        var f = 'Employee Marital Status';
+         this.showrequiredMessage(f,'',errorTitle);
+       }
 
      if(selectempTypes.length>0)
      {
-      this.emp.Employeetype = selectempTypes[0];
-        if(this.emp.Employeetype == "Permanent"){
-        this.emp.IsPermanent = true;
+        emp.Employeetype = selectempTypes[0];
+        if(emp.Employeetype == "Permanent"){
+        emp.IsPermanent = true;
       }
-      else{this.emp.IsPermanent= false;}
+      else{emp.IsPermanent= false;}
      }
      else
-     {this.emp.MaritalStatus= false;}
+     {
+       emp.IsPermanent= false;
+        var txt = '';
+        var f = 'Employee Type ';
+        this.showrequiredMessage(f,'',errorTitle);
+       
+       }
 
-      this.emp.Address1 = this.empForm.value['ad1'];
-      this.emp.Adress2 = this.empForm.value['ad2'];
-      this.emp.Place = this.empForm.value['place'];
-      this.emp.State = this.empForm.value['state'];
-      this.emp.PostalCode = this.empForm.value['postal'];
-      this.emp.AAdharNumber = this.empForm.value['aad'];
-      this.emp.PAN = this.empForm.value['pan'];
-      this.emp.Guard_FirstName = this.empForm.value['gfirstName'];
-      this.emp.Guard_LastName = this.empForm.value['glastName'];
-      this.emp.Guard_MiddleName = this.empForm.value['gmiddleName'];
-      this.emp.Guard_Phone = this.empForm.value['gphone'];
-      this.emp.Day2 = this.empForm.value['day2'];
-      this.emp.Month2 = this.empForm.value['month2'];
-      this.emp.Year2 = this.empForm.value['year2'];
-      this.emp.LoginType = this.empForm.value['ut'];
-      this.emp.Designation = this.empForm.value['desg'];
-      this.emp.StationCode = this.empForm.value['station'];
-      this.emp.LocationName = this.empForm.value['location'];
+      emp.Address1 = this.empForm.value['ad1'];
+      emp.Adress2 = this.empForm.value['ad2'];
+      emp.Place = this.empForm.value['place'];
+      emp.State = this.empForm.value['state'];
+      emp.PostalCode = this.empForm.value['postal'];
+      emp.AAdharNumber = this.empForm.value['aad'];
+      emp.PAN = this.empForm.value['pan'];
+      emp.Guard_FirstName = this.empForm.value['gfirstName'];
+      emp.Guard_LastName = this.empForm.value['glastName'];
+      emp.Guard_MiddleName = this.empForm.value['gmiddleName'];
+      emp.Guard_Phone = this.empForm.value['gphone'];
+      emp.Day2 = this.empForm.value['day2'];
+      emp.Month2 = this.empForm.value['month2'];
+      emp.Year2 = this.empForm.value['year2'];
+      emp.LoginType = this.empForm.value['ut'];
+      emp.Designation = this.empForm.value['desg'];
+      emp.StationCode = this.empForm.value['station'];
+      emp.LocationName = this.empForm.value['location'];
 
       console.log('on submit.....');
          
-         console.log(this.emp);
+         console.log(emp);
+
+        //  setTimeout(function(){
+        //     this.loaded=false;
+
+        //  },2000);
          
 
 
@@ -206,6 +227,7 @@ initForm(){
 
   }
   checkValue(event:any,field){
+    const emp : Employee = new Employee();
         const errorTitle : string = 'INVALID INPUT!!!';
         if(field=='mars'){
               const selectedmaritals = this.empForm.value.mars
@@ -216,18 +238,18 @@ initForm(){
 
                 if(selectedmaritals.length>0)
                 {
-                  this.emp.Marital = selectedmaritals[0];
-                  if(this.emp.Marital == "Married"){
-                    this.emp.MaritalStatus = true;
+                  emp.Marital = selectedmaritals[0];
+                  if(emp.Marital == "Married"){
+                    emp.MaritalStatus = true;
                   }
                   else{
-                    this.emp.MaritalStatus= false;
+                    emp.MaritalStatus= false;
 
                     }
                 }
                 else
                 {
-                  this.emp.MaritalStatus= false;
+                  emp.MaritalStatus= false;
                     var txt = '';
                     var f = 'Employee Marital Status';
                     this.showrequiredMessage(f,'',errorTitle);
@@ -242,15 +264,15 @@ initForm(){
 
                 if(selectempTypes.length>0)
                 {
-                  this.emp.Employeetype = selectempTypes[0];
-                    if(this.emp.Employeetype == "Permanent"){
-                    this.emp.IsPermanent = true;
+                  emp.Employeetype = selectempTypes[0];
+                    if(emp.Employeetype == "Permanent"){
+                    emp.IsPermanent = true;
                   }
-                  else{this.emp.IsPermanent= false;}
+                  else{emp.IsPermanent= false;}
                 }
                 else
                 {
-                  this.emp.IsPermanent= false;
+                  emp.IsPermanent= false;
                     var txt = '';
                     var f = 'Employee Type ';
                     this.showrequiredMessage(f,'',errorTitle);
